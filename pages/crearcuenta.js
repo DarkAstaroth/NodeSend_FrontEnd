@@ -1,7 +1,21 @@
 import React from 'react';
 import Layout from '../components/Layout';
+import { useFormik } from 'formik';
 
 const CrearCuenta = () => {
+
+    // Formulario y validacion con formik
+    const formik = useFormik({
+        initialValues: {
+            nombre: '',
+            email: '',
+            password: ''
+        },
+        onSubmit: valores => {
+            console.log(valores);
+        }
+    });
+
     return (
         <Layout>
             <div className="md:w4/5 xl:w-3/5 mx-auto mb-32">
@@ -12,7 +26,10 @@ const CrearCuenta = () => {
                 <div className="flex justify-center mt-5">
 
                     <div className="w-full max-w-lg">
-                        <form className="bg-white rounded shadow-md px-8 pt-6 pb-8 mb-4">
+                        <form
+                            className="bg-white rounded shadow-md px-8 pt-6 pb-8 mb-4"
+                            onSubmit={ formik.handleSubmit}
+                        >
 
                             <div className="mb-4">
 
@@ -28,6 +45,9 @@ const CrearCuenta = () => {
                                     name="nombre"
                                     id="nombre"
                                     placeholder="Nombre de usuario"
+                                    value={formik.values.nombre}
+                                    onChange={formik.handleChange}
+                                    onBlur={ formik.handleBlur}
                                 />
 
                             </div>
@@ -46,6 +66,9 @@ const CrearCuenta = () => {
                                     name="email"
                                     id="email"
                                     placeholder="Email de usuario"
+                                    value={formik.values.email}
+                                    onChange={formik.handleChange}
+                                    onBlur={ formik.handleBlur}
                                 />
 
                             </div>
@@ -64,6 +87,9 @@ const CrearCuenta = () => {
                                     name="password"
                                     id="password"
                                     placeholder="Password de usuario"
+                                    value={formik.values.password}
+                                    onChange={formik.handleChange}
+                                    onBlur={formik.handleBlur}
                                 />
 
                             </div>
