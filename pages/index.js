@@ -1,8 +1,10 @@
+import React from 'react'
+import Layout from '../components/Layout';
 
 export default function Home() {
   return (
-    <div className="container">
-      <h1>Hola Mundo desde nextjs</h1>
-    </div>
-  )
+    <Layout>
+      <h1>index</h1>
+    </Layout>
+  );
 }
