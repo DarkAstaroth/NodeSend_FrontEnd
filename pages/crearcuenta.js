@@ -1,6 +1,7 @@
 import React from 'react';
 import Layout from '../components/Layout';
 import { useFormik } from 'formik';
+import * as Yup from 'yup';
 
 const CrearCuenta = () => {
 
@@ -11,6 +12,15 @@ const CrearCuenta = () => {
             email: '',
             password: ''
         },
+        validationSchema: Yup.object({
+            nombre: Yup.string()
+                .required('El Nombre es obligatorio'),
+            email: Yup.string()
+                .required('El Email es obligatorio'),
+            password: Yup.string()
+                .required('El password es obligatorio')
+                .min(6, 'El password debe contener al menos 6 caracteres')
+        }),
         onSubmit: valores => {
             console.log(valores);
         }
@@ -28,7 +38,7 @@ const CrearCuenta = () => {
                     <div className="w-full max-w-lg">
                         <form
                             className="bg-white rounded shadow-md px-8 pt-6 pb-8 mb-4"
-                            onSubmit={ formik.handleSubmit}
+                            onSubmit={formik.handleSubmit}
                         >
 
                             <div className="mb-4">
@@ -47,8 +57,19 @@ const CrearCuenta = () => {
                                     placeholder="Nombre de usuario"
                                     value={formik.values.nombre}
                                     onChange={formik.handleChange}
-                                    onBlur={ formik.handleBlur}
+                                    onBlur={formik.handleBlur}
                                 />
+
+                                {
+                                    formik.touched.nombre && formik.errors.nombre
+                                        ?
+                                        <div className="my-2 bg-gray-200 border-l-4 border-red-500 text-red-7 p-4">
+                                            <p className="font-bold">Error</p>
+                                            <p>{formik.errors.nombre}</p>
+                                        </div>
+                                        :
+                                        null
+                                }
 
                             </div>
 
@@ -68,8 +89,19 @@ const CrearCuenta = () => {
                                     placeholder="Email de usuario"
                                     value={formik.values.email}
                                     onChange={formik.handleChange}
-                                    onBlur={ formik.handleBlur}
+                                    onBlur={formik.handleBlur}
                                 />
+
+                                {
+                                    formik.touched.email && formik.errors.email
+                                        ?
+                                        <div className="my-2 bg-gray-200 border-l-4 border-red-500 text-red-7 p-4">
+                                            <p className="font-bold">Error</p>
+                                            <p>{formik.errors.email}</p>
+                                        </div>
+                                        :
+                                        null
+                                }
 
                             </div>
 
@@ -83,7 +115,7 @@ const CrearCuenta = () => {
 
                                 <input
                                     className="shadow appereance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                    type="text"
+                                    type="password"
                                     name="password"
                                     id="password"
                                     placeholder="Password de usuario"
@@ -91,6 +123,17 @@ const CrearCuenta = () => {
                                     onChange={formik.handleChange}
                                     onBlur={formik.handleBlur}
                                 />
+
+                                {
+                                    formik.touched.password && formik.errors.password
+                                        ?
+                                        <div className="my-2 bg-gray-200 border-l-4 border-red-500 text-red-7 p-4">
+                                            <p className="font-bold">Error</p>
+                                            <p>{formik.errors.password}</p>
+                                        </div>
+                                        :
+                                        null
+                                }
 
                             </div>
 
