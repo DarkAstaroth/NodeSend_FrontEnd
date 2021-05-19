@@ -8,7 +8,7 @@ const AuthState = ({ children }) => {
 
     // Definir un state inicial
     const initialState = {
-        token: '',
+        token: typeof window !== 'undefined' ? localStorage.getItem('ReactSendToken') : null,
         autenticado: null,
         usuario: null,
         mensaje: null
@@ -46,6 +46,10 @@ const AuthState = ({ children }) => {
     const iniciarSesion = async datos => {
         try {
             const respuesta = await clienteAxios.post('api/auth', datos);
+            dispach({
+                type: LOGIN_EXISTOSO,
+                payload: respuesta.data.token
+            });
         } catch (error) {
             console.log(error.response.data.msg);
             dispach({

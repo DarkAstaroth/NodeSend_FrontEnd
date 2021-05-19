@@ -1,4 +1,4 @@
-import { LIMPIAR_ALERTA, LOGIN_ERROR, REGISTRO_ERROR, REGISTRO_EXITOSO, USUARIO_AUTENTICADO } from "../../types";
+import { LIMPIAR_ALERTA, LOGIN_ERROR, LOGIN_EXISTOSO, REGISTRO_ERROR, REGISTRO_EXITOSO, USUARIO_AUTENTICADO } from "../../types";
 
 const authReducer = (state, action) => {
     switch (action.type) {
@@ -7,12 +7,19 @@ const authReducer = (state, action) => {
         case LOGIN_ERROR:
             return {
                 ...state,
-                mensaje : action.payload
+                mensaje: action.payload
             }
         case LIMPIAR_ALERTA:
             return {
                 ...state,
                 mensaje: null
+            }
+        case LOGIN_EXISTOSO:
+            localStorage.setItem('ReactSendToken',action.payload)
+            return {
+                ...state,
+                token: action.payload,
+                autenticado : true
             }
         default:
             break;
