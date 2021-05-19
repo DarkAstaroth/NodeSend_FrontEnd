@@ -1,11 +1,11 @@
-import { USUARIO_AUTENTICADO } from "../../types";
+import { REGISTRO_EXITOSO, USUARIO_AUTENTICADO } from "../../types";
 
 const authReducer = (state, action) => {
     switch (action.type) {
-        case USUARIO_AUTENTICADO:
+        case REGISTRO_EXITOSO:
             return {
                 ...state,
-                usuario: action.payload
+                mensaje : action.payload
             }
         default:
             break;
