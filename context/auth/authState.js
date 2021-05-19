@@ -16,6 +16,11 @@ const AuthState = ({ children }) => {
     // Definir el reducer
     const [state, dispach] = useReducer(authReducer, initialState);
 
+    // Registrar nuevos usuarios
+    const registrarUsuario = datos => {
+        console.log(datos);
+    }
+
     // usuario autenticado
     const usuarioAutenticado = nombre => {
         dispach({
@@ -31,6 +36,7 @@ const AuthState = ({ children }) => {
                 autenticado: state.autenticado,
                 usuario: state.usuario,
                 mensaje: state.mensaje,
+                registrarUsuario,
                 usuarioAutenticado
             }}
         >
