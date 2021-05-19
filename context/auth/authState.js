@@ -42,6 +42,11 @@ const AuthState = ({ children }) => {
         }, 3000);
     }
 
+    // autenticar usuarios
+    const iniciarSesion = async datos => {
+        console.log(datos);
+    }
+
     // usuario autenticado
     const usuarioAutenticado = nombre => {
         dispach({
@@ -58,7 +63,8 @@ const AuthState = ({ children }) => {
                 usuario: state.usuario,
                 mensaje: state.mensaje,
                 registrarUsuario,
-                usuarioAutenticado
+                usuarioAutenticado,
+                iniciarSesion
             }}
         >
             {children}

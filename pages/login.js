@@ -1,9 +1,14 @@
-import React from 'react'
+import React, { useContext }from 'react'
 import Layout from '../components/Layout';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
+import authContext from '../context/auth/authContext';
 
 const Login = () => {
+
+    // Definir el context
+    const AuthContext = useContext(authContext);
+    const { mensaje,iniciarSesion } = AuthContext;
 
     // Formulario y validacion con formik
     const formik = useFormik({
@@ -18,7 +23,7 @@ const Login = () => {
                 .required('El password no puede ir vacio')
         }),
         onSubmit: valores => {
-            console.log(valores);
+            iniciarSesion(valores);
         }
     });
 
