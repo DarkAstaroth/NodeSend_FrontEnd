@@ -3,6 +3,7 @@ import Layout from '../components/Layout';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import authContext from '../context/auth/authContext';
+import Alerta from '../components/Alerta';
 
 const Login = () => {
 
@@ -33,6 +34,7 @@ const Login = () => {
                 <h2 className="text-4xl font-sans font-bold text-gray-800 text-center my-4">
                     Iniciar sesion
                 </h2>
+                { mensaje && <Alerta /> }
 
                 <div className="flex justify-center mt-5">
 

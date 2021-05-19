@@ -1,7 +1,7 @@
 import React, { useReducer } from 'react'
 import authContext from './authContext';
 import authReducer from './authReducer';
-import { LIMPIAR_ALERTA, REGISTRO_ERROR, REGISTRO_EXITOSO, USUARIO_AUTENTICADO } from '../../types/';
+import { LIMPIAR_ALERTA, LOGIN_ERROR, LOGIN_EXISTOSO, REGISTRO_ERROR, REGISTRO_EXITOSO, USUARIO_AUTENTICADO } from '../../types/';
 import clienteAxios from '../../config/axios';
 
 const AuthState = ({ children }) => {
@@ -44,7 +44,21 @@ const AuthState = ({ children }) => {
 
     // autenticar usuarios
     const iniciarSesion = async datos => {
-        console.log(datos);
+        try {
+            const respuesta = await clienteAxios.post('api/auth', datos);
+        } catch (error) {
+            console.log(error.response.data.msg);
+            dispach({
+                type: LOGIN_ERROR,
+                payload: error.response.data.msg
+            })
+        }
+
+        setTimeout(() => {
+            dispach({
+                type: LIMPIAR_ALERTA
+            })
+        }, 3000);
     }
 
     // usuario autenticado
