@@ -21,6 +21,11 @@ const authReducer = (state, action) => {
                 token: action.payload,
                 autenticado : true
             }
+        case USUARIO_AUTENTICADO:
+            return {
+                ...state,
+                usuario : action.payload
+            }
         default:
             break;
     }

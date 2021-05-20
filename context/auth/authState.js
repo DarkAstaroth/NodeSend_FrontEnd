@@ -3,6 +3,7 @@ import authContext from './authContext';
 import authReducer from './authReducer';
 import { LIMPIAR_ALERTA, LOGIN_ERROR, LOGIN_EXISTOSO, REGISTRO_ERROR, REGISTRO_EXITOSO, USUARIO_AUTENTICADO } from '../../types/';
 import clienteAxios from '../../config/axios';
+import tokenAuth from '../../config/tokenAuth';
 
 const AuthState = ({ children }) => {
 
@@ -65,13 +66,23 @@ const AuthState = ({ children }) => {
         }, 3000);
     }
 
-    // usuario autenticado
-    const usuarioAutenticado = nombre => {
-        dispach({
-            type: USUARIO_AUTENTICADO,
-            payload: nombre
-        })
-    }
+    // Retorne el usuario autenticado en base al JWT
+    const usuarioAutenticado = async () => {
+        const token = localStorage.getItem('ReactSendToken');
+        if (token) {
+            tokenAuth(token);
+        }
+        
+        try {
+            const respuesta = await clienteAxios.get('/api/auth');
+            dispach({
+                type: USUARIO_AUTENTICADO,
+                payload: respuesta.data.usuario
+            });
+        } catch (error) {
+            
+        }
+     }
 
     return (
         <authContext.Provider
