@@ -4,9 +4,16 @@ import clienteAxios from '../config/axios';
 
 const Dropzone = () => {
 
-    const onDrop = useCallback((acceptedFiles) => {
+    const onDrop = useCallback( async (acceptedFiles)  => {
         console.log(acceptedFiles);
-    });
+
+        // crear un form Data
+        const formData = new FormData();
+        formData.append('archivo', acceptedFiles[0]);
+
+        const resultado = await clienteAxios.post('/api/archivos', formData);
+        console.log(resultado);
+    },[]);
 
     // Extraer contenido de dropzone
     const { getRootProps, getInputProps, isDragActive, acceptedFiles } = useDropzone({ onDrop });
