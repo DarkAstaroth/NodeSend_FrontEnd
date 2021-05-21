@@ -16,28 +16,28 @@ const AuthState = ({ children }) => {
     }
 
     // Definir el reducer
-    const [state, dispach] = useReducer(authReducer, initialState);
+    const [state, dispatch] = useReducer(authReducer, initialState);
 
     // Registrar nuevos usuarios
     const registrarUsuario = async datos => {
         try {
             
             const respuesta = await clienteAxios.post('/api/usuarios', datos);
-            dispach({
+            dispatch({
                 type: REGISTRO_EXITOSO,
                 payload: respuesta.data.msg
             });
 
         } catch (error) {
             console.log(error);
-            dispach({
+            dispatch({
                 type: REGISTRO_ERROR,
                 payload: error.response.data.msg
             });
         }
 
         setTimeout(() => {
-            dispach({
+            dispatch({
                 type: LIMPIAR_ALERTA
             })
         }, 3000);
@@ -47,20 +47,20 @@ const AuthState = ({ children }) => {
     const iniciarSesion = async datos => {
         try {
             const respuesta = await clienteAxios.post('api/auth', datos);
-            dispach({
+            dispatch({
                 type: LOGIN_EXISTOSO,
                 payload: respuesta.data.token
             });
         } catch (error) {
             console.log(error.response.data.msg);
-            dispach({
+            dispatch({
                 type: LOGIN_ERROR,
                 payload: error.response.data.msg
             })
         }
 
         setTimeout(() => {
-            dispach({
+            dispatch({
                 type: LIMPIAR_ALERTA
             })
         }, 3000);
@@ -75,13 +75,13 @@ const AuthState = ({ children }) => {
         
         try {
             const respuesta = await clienteAxios.get('/api/auth');
-            dispach({
+            dispatch({
                 type: USUARIO_AUTENTICADO,
                 payload: respuesta.data.usuario
             });
         } catch (error) {
             console.log(error.response.data.msg);
-            dispach({
+            dispatch({
                 type: LOGIN_ERROR,
                 payload: error.response.data.msg
             })
@@ -90,7 +90,7 @@ const AuthState = ({ children }) => {
     
     // funcion para cerrar sesion
     const cerrarSesion = () => {
-        dispach({
+        dispatch({
             type:CERRAR_SESION,
         })
     }
