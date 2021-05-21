@@ -1,5 +1,5 @@
 import React, { useReducer } from 'react'
-import { MOSTRAR_ALERTA, OCULTAR_ALERTA, SUBIR_ARCHIVO, SUBIR_ARCHIVO_ERROR, SUBIR_ARCHIVO_EXITO } from '../../types';
+import { CREAR_ENLACE_EXITO, MOSTRAR_ALERTA, OCULTAR_ALERTA, SUBIR_ARCHIVO, SUBIR_ARCHIVO_ERROR, SUBIR_ARCHIVO_EXITO } from '../../types';
 import appContext from './appContext';
 import appReducer from './appReducer';
 import clienteAxios from '../../config/axios';
@@ -10,7 +10,11 @@ const AppState = ({ children }) => {
         mensaje_archivo: '',
         nombre: '',
         nombre_original: '',
-        cargando:null
+        cargando: null,
+        descargas: 1,
+        password: '',
+        autor: null,
+        url:''
     }
 
     // crear dispatch y state
@@ -57,15 +61,40 @@ const AppState = ({ children }) => {
         }
     }
 
+    // crea un enlace una vez que se suba el archivo
+    const crearEnlace = async () => {
+        const data = {
+            nombre: state.nombre,
+            nombre_original: state.nombre_original,
+            descargas: state.descargas,
+            password: state.password,
+            autor:state.autor
+        }
+        try {
+            const respuesta = await clienteAxios.post('/api/enlaces', data);
+            dispatch({
+                type: CREAR_ENLACE_EXITO,
+                payload: respuesta.data.msg
+            });
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
     return (
         <appContext.Provider
             value={{
                 nombre: state.nombre,
                 nombre_original:state.nombre_original,
                 mensaje_archivo: state.mensaje_archivo,
-                cargando : state.cargando,
+                cargando: state.cargando,
+                descargas: state.descargas,
+                password: state.password,
+                autor: state.autor,
+                url: state.url,
                 mostrarAlerta,
-                subirArchivo
+                subirArchivo,
+                crearEnlace
             }}
         >
             {children}

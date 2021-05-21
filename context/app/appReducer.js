@@ -1,4 +1,4 @@
-import { MOSTRAR_ALERTA, OCULTAR_ALERTA, SUBIR_ARCHIVO, SUBIR_ARCHIVO_ERROR, SUBIR_ARCHIVO_EXITO } from "../../types";
+import { CREAR_ENLACE_EXITO, MOSTRAR_ALERTA, OCULTAR_ALERTA, SUBIR_ARCHIVO, SUBIR_ARCHIVO_ERROR, SUBIR_ARCHIVO_EXITO } from "../../types";
 
 
 const appReducer = (state, action) => {
@@ -27,6 +27,11 @@ const appReducer = (state, action) => {
                 ...state,
                 cargando:true
             }
+        case CREAR_ENLACE_EXITO:
+            return {
+                ...state,
+                url: action.payload
+             }
         default:
             break;
     }
