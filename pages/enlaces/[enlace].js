@@ -1,4 +1,13 @@
 import Layout from '../../components/Layout';
+import clienteAxios from '../../config/axios';
+
+export async function getStaticProps() {
+    
+}
+
+export async function getStaticPaths() {
+    
+}
 
 export default () => {
     return (
