@@ -1,5 +1,5 @@
 import React, { useReducer } from 'react'
-import { MOSTRAR_ALERTA } from '../../types';
+import { MOSTRAR_ALERTA, OCULTAR_ALERTA } from '../../types';
 import appContext from './appContext';
 import appReducer from './appReducer';
 
@@ -18,6 +18,12 @@ const AppState = ({ children }) => {
             type: MOSTRAR_ALERTA,
             payload: msg
         });
+
+        setTimeout(() => {
+            dispatch({
+                type: OCULTAR_ALERTA
+            });
+        }, 3000);
     }
     return (
         <appContext.Provider
