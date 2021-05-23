@@ -3,6 +3,7 @@ import { useDropzone } from 'react-dropzone';
 import clienteAxios from '../config/axios';
 import appContext from '../context/app/appContext';
 import authContext from '../context/auth/authContext';
+import Formulario from '../components/Formulario';
 
 const Dropzone = () => {
 
@@ -49,7 +50,7 @@ const Dropzone = () => {
                     </ul>
 
                     {
-                        autenticado ? 'esto se ve si esta autenticado':""
+                        autenticado ? <Formulario />:""
                     }
 
                     {cargando ? <p className="my-10 text-center text-gray-600">Subiendo archivo...</p> : (
