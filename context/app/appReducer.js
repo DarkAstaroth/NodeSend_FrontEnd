@@ -1,4 +1,4 @@
-import { CREAR_ENLACE_EXITO, MOSTRAR_ALERTA, OCULTAR_ALERTA, SUBIR_ARCHIVO, SUBIR_ARCHIVO_ERROR, SUBIR_ARCHIVO_EXITO } from "../../types";
+import { CREAR_ENLACE_EXITO, LIMPIAR_STATE, MOSTRAR_ALERTA, OCULTAR_ALERTA, SUBIR_ARCHIVO, SUBIR_ARCHIVO_ERROR, SUBIR_ARCHIVO_EXITO } from "../../types";
 
 
 const appReducer = (state, action) => {
@@ -31,7 +31,19 @@ const appReducer = (state, action) => {
             return {
                 ...state,
                 url: action.payload
-             }
+            }
+        case LIMPIAR_STATE:
+            return {
+                ...state,
+                mensaje_archivo: null,
+                nombre: '',
+                nombre_original: '',
+                cargando: null,
+                descargas: 1,
+                password: '',
+                autor: null,
+                url:''
+            }
         default:
             break;
     }
