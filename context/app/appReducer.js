@@ -1,4 +1,4 @@
-import { AGREGAR_PASSWORD, CREAR_ENLACE_EXITO, LIMPIAR_STATE, MOSTRAR_ALERTA, OCULTAR_ALERTA, SUBIR_ARCHIVO, SUBIR_ARCHIVO_ERROR, SUBIR_ARCHIVO_EXITO } from "../../types";
+import { AGREGAR_DESCARGAS, AGREGAR_PASSWORD, CREAR_ENLACE_EXITO, LIMPIAR_STATE, MOSTRAR_ALERTA, OCULTAR_ALERTA, SUBIR_ARCHIVO, SUBIR_ARCHIVO_ERROR, SUBIR_ARCHIVO_EXITO } from "../../types";
 
 
 const appReducer = (state, action) => {
@@ -48,6 +48,11 @@ const appReducer = (state, action) => {
             return {
                 ...state,
                 password : action.payload
+            }
+        case AGREGAR_DESCARGAS:
+            return {
+                ...state,
+                descargas: action.payload
             }
         default:
             break;

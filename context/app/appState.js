@@ -1,5 +1,5 @@
 import React, { useReducer } from 'react'
-import { AGREGAR_PASSWORD, CREAR_ENLACE_EXITO, LIMPIAR_STATE, MOSTRAR_ALERTA, OCULTAR_ALERTA, SUBIR_ARCHIVO, SUBIR_ARCHIVO_ERROR, SUBIR_ARCHIVO_EXITO } from '../../types';
+import { AGREGAR_DESCARGAS, AGREGAR_PASSWORD, CREAR_ENLACE_EXITO, LIMPIAR_STATE, MOSTRAR_ALERTA, OCULTAR_ALERTA, SUBIR_ARCHIVO, SUBIR_ARCHIVO_ERROR, SUBIR_ARCHIVO_EXITO } from '../../types';
 import appContext from './appContext';
 import appReducer from './appReducer';
 import clienteAxios from '../../config/axios';
@@ -95,6 +95,14 @@ const AppState = ({ children }) => {
         })
     }
 
+    // agrega un numero de descargas
+    const agregarDescargas = descargas => {
+        dispatch({
+            type: AGREGAR_DESCARGAS,
+            payload: descargas
+        })
+    }
+
     return (
         <appContext.Provider
             value={{
@@ -110,7 +118,8 @@ const AppState = ({ children }) => {
                 subirArchivo,
                 crearEnlace,
                 limpiarState,
-                agregarPassword
+                agregarPassword,
+                agregarDescargas
             }}
         >
             {children}
