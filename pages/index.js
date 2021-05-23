@@ -17,7 +17,10 @@ export default function Home() {
   const { mensaje_archivo, url } = AppContext;
 
   useEffect(() => {
-    usuarioAutenticado();
+    const token = localStorage.getItem('ReactSendToken');
+    if (token) {
+      usuarioAutenticado();
+    }
   }, [])
 
   return (
