@@ -121,7 +121,7 @@ const Login = () => {
                             <input
                                 className="bg-red-500 hover:bg-gray-900 w-full p-2 text-white uppercase font-bold"
                                 type="submit"
-                                value="Crear Cuenta" />
+                                value="Iniciar Sesion" />
                         </form>
                     </div>
                 </div>

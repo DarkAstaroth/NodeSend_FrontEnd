@@ -50,7 +50,7 @@ export default function Home() {
 
                 <div className="md:flex-1 mb-3 mx-2 mt-12 ls:mt-0">
                   <h2 className="text-4xl font-sans font-bold text-gray-800 my-4">
-                    Compartit archivos de forma sencilla y privada
+                    Compartir archivos de forma sencilla y privada
                   </h2>
                   <p className="text-lg leading-loose">
                     <span className="text-red-500 font-bold">React Node Send</span> te permite compartir archivos con cifrado de extremo a extremo y un archivo que es eliminado despúes de ser descargado. Así que puedes mantener lo que compartes en privado y asegurarte de que tus cosas no permanezcan en línea para siempre.
