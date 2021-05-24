@@ -1,6 +1,8 @@
 import Layout from '../../components/Layout';
 import clienteAxios from '../../config/axios';
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import appContext from '../../context/app/appContext';
+import Alerta from '../../components/Alerta';
 
 export async function getServerSideProps({ params }) {
     const { enlace } = params;
@@ -25,12 +27,28 @@ export async function getServerSidePaths() {
 
 const Enlace = ({ enlace }) => {
 
-    const [tienePassword, setTienePassword] = useState(enlace.password);
-    console.log(tienePassword);
+    
 
-    const verificarPassword = e => {
+    const AppContext = useContext(appContext);
+    const { mostrarAlerta , mensaje_archivo } = AppContext;
+
+    const [tienePassword, setTienePassword] = useState(enlace.password);
+    const [password, setPassword] = useState('');
+
+    const verificarPassword = async e => {
         e.preventDefault();
-        console.log('verificando....');
+
+        const data = {
+            password
+        }
+
+        try {
+            const resultado = await clienteAxios.post(`/api/enlaces/${enlace.enlace}`, data);
+            setTienePassword(resultado.data.password);
+        } catch (error) {
+            mostrarAlerta(error.response.data.msg)
+        }
+        
     }
 
     return (
@@ -39,6 +57,7 @@ const Enlace = ({ enlace }) => {
                 tienePassword ? (
                     <>
                         <p className="text-center">Este enlace esta protegido por un password, colocalo a continuacion</p>
+                        {mensaje_archivo && <Alerta />}
                         <div className="flex justify-center mt-5">
                             <div className="w-full max-w-lg">
                                 <form
@@ -59,6 +78,8 @@ const Enlace = ({ enlace }) => {
                                             name="password"
                                             id="password"
                                             placeholder="Password del archivo"
+                                            value={password}
+                                            onChange={ e=> setPassword(e.target.value) }
                                         />
 
                                     </div>
